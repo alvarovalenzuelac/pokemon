@@ -21,8 +21,8 @@ $(document).ready(function(){
             //console.log("front_shiny",data.sprites.front_shiny)
             //console.log("front_shiny_female",data.sprites.front_shiny_female)
             let lista_tipos = ""
-            for(let i = 0;i<data.types;i++){
-                lista_tipos += `<li class="h5 text-capitalize">${data.types[i].type.name}</li>`//tipo
+            for(let i = 0;i<data.types.length;i++){
+                lista_tipos += `<li class="h5 text-capitalize list-group-item">${data.types[i].type.name}</li>`//tipo
             }
             imagenes_default = [data.sprites.front_default,data.sprites.back_default]
             imagenes_shiny = [data.sprites.front_shiny,data.sprites.back_shiny]
@@ -30,6 +30,22 @@ $(document).ready(function(){
             let contador = 1;
 
 
+            
+            $("section").html(`
+            <p class="h2 text-capitalize">${data.name}</p>
+            <img id="default" class="" src="${data.sprites.front_default}" data="${data.sprites.back_default}" alt="">
+            <img id="shiny" src="${data.sprites.back_default}" data="${data.sprites.back_shiny}" alt="">
+            
+            
+            <p class="h4 text-start">Types</p>
+            <ul class="list-group text-center">
+            ${lista_tipos}
+            </ul>
+            <p class="h4 text-start">Altura</p>
+            <p class="h5">${data.height}</p>
+            <p class="h4 text-start">Peso</p>
+            <p class="h5">${data.weight}</p>`)
+            
             setInterval(function() {
                 if(contador % 2 == 0){
                     $("#default").attr("src",imagenes_default[0])
@@ -40,23 +56,7 @@ $(document).ready(function(){
                 }
                 contador +=1
             }, 4000);
-
-            $("section").html(`
-            <p class="h2 text-capitalize">${data.name}</p>
-            <img id="default" class="" src="${data.sprites.front_default}" data="${data.sprites.back_default}" alt="">
-            <img id="shiny" src="${data.sprites.back_default}" data="${data.sprites.back_shiny}" alt="">
-
             
-            <p class="h4">Types</p>
-            <ul>
-                ${lista_tipos}
-            </ul>
-            <p class="h4">Altura</p>
-            <p class="h5">${data.height}</p>
-            <p class="h4">Peso</p>
-            <p class="h5">${data.weight}</p>`)
-
-
         })
     })
 })
